@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="shortcut icon" href="./favicon.png" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css"
+    />
+    <link rel="stylesheet" href="./src/index.css" />
+    <link rel="stylesheet" href="./src/app.css" />
+    <script>
+      var ALGOLIA_INSIGHTS_SRC =
+        'https://cdn.jsdelivr.net/npm/search-insights@1.7.1';
+      !(function(e, a, t, n, s, i, c) {
+        (e.AlgoliaAnalyticsObject = s),
+          (e[s] =
+            e[s] ||
+            function() {
+              (e[s].queue = e[s].queue || []).push(arguments);
+            }),
+          (i = a.createElement(t)),
+          (c = a.getElementsByTagName(t)[0]),
+          (i.async = 1),
+          (i.src = n),
+          c.parentNode.insertBefore(i, c);
+      })(window, document, 'script', ALGOLIA_INSIGHTS_SRC, 'aa');
+
+      aa('init', {
+        appId: 'latency',
+        apiKey: 'af044fb0788d6bb15f807e4420592bc5',
+      });
+    </script>
+
+    <title>Agoflix Demo</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1 class="header-title">
+          <a href="/">Algoflix</a>
+        </h1>
+        <div id="searchbox"></div>
+      </header>
+
+      <div class="search-refinments">
+        <div id="current-refinements"></div>
+        <div id="clear-refinements"></div>
+      </div>
+      <div class="search-panel">
+        <div class="search-panel__filters">
+          <h2>Year</h2>
+          <div id="year"></div>
+          <h2>Genre</h2>
+          <div id="genres"></div>
+          <h2>Price</h2>
+          <div id="price"></div>
+          <div id="price-slider"></div>
+        </div>
+
+        <div class="search-panel__results">
+          <div id="hits"></div>
+          <div id="pagination"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.10.5/dist/algoliasearch-lite.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.37.2"></script>
+    <script src="./src/app.js"></script>
+  </body>
+</html>
