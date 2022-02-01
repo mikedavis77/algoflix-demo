@@ -8,11 +8,11 @@ const searchClient = algoliasearch(
 const search = instantsearch({
   indexName: 'algoflix',
   searchClient,
-  //routing: true,
-  routing: {
+  // routing: true, // Basic routing enabled.
+  /* routing: { / Basic routing with index set, so it doesn't show in the URL.
     stateMapping: instantsearch.stateMappings.singleIndex('algoflix'),
-  },
-  /* routing: {
+  }, */
+  /* routing: { // Custom routes.
     router: instantsearch.routers.history({
       windowTitle({ query }) {
         return query ? `Results for "${query}"` : 'Search';
@@ -117,7 +117,6 @@ const search = instantsearch({
         };
       },
     },
-    //stateMapping: instantsearch.stateMappings.singleIndex('algoflix'),
   }, */
 });
 
@@ -164,7 +163,7 @@ search.addWidgets([
   instantsearch.widgets.hits({
     container: '#hits',
     templates: {
-      /* item: hit => `
+      item: hit => `
         <div>
           <img src="${hit.backdrop}" align="left" alt="${hit.title}" />
           <div class="hit-name">
@@ -174,8 +173,8 @@ search.addWidgets([
           </div>
           <div class="hit-price">\$${hit.price}</div>
         </div>
-      `, */
-      item: (hit, bindEvent) => `
+      `,
+      /* item: (hit, bindEvent) => `
         <div>
           <img src="${hit.backdrop}" align="left" alt="${hit.title}" />
           <div class="hit-name">
@@ -190,7 +189,7 @@ search.addWidgets([
             'add-to-cart'
           )}>Add to Cart</button></div>
         </div>
-      `,
+      `, */
     },
   }),
   instantsearch.widgets.pagination({
@@ -198,11 +197,11 @@ search.addWidgets([
   }),
 ]);
 
-search.use(
+/* search.use(
   instantsearch.middlewares.createInsightsMiddleware({
     insightsClient: window.aa,
   })
-);
+); */
 //window.aa('setUserToken', 'my-user-token');
 
 search.start();
