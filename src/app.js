@@ -6,13 +6,15 @@ const searchClient = algoliasearch(
 );
 
 const search = instantsearch({
-  indexName: 'algoflix',
+  indexName: 'algoflix-en-us',
   searchClient,
   // routing: true, // Basic routing enabled.
-  /* routing: { / Basic routing with index set, so it doesn't show in the URL.
-    stateMapping: instantsearch.stateMappings.singleIndex('algoflix'),
+  /* routing: {
+    // Basic routing with index set, so it doesn't show in the URL.
+    stateMapping: instantsearch.stateMappings.singleIndex('algoflix-en-us'),
   }, */
-  /* routing: { // Custom routes.
+  /* routing: {
+    // Custom routes.
     router: instantsearch.routers.history({
       windowTitle({ query }) {
         return query ? `Results for "${query}"` : 'Search';
@@ -85,7 +87,7 @@ const search = instantsearch({
 
     stateMapping: {
       stateToRoute(uiState) {
-        const indexUiState = uiState['algoflix'] || {};
+        const indexUiState = uiState['algoflix-en-us'] || {};
         //console.log('sr:', uiState);
 
         return {
@@ -93,8 +95,7 @@ const search = instantsearch({
           page: indexUiState.page,
           year: indexUiState.refinementList && indexUiState.refinementList.year,
           genres:
-            indexUiState.refinementList &&
-            indexUiState.refinementList['genres.en-US'],
+            indexUiState.refinementList && indexUiState.refinementList.genres,
           price:
             indexUiState.refinementList && indexUiState.refinementList.price,
           priceRange: indexUiState.range && indexUiState.range.price,
@@ -109,7 +110,7 @@ const search = instantsearch({
             page: routeState.page,
             refinementList: {
               year: routeState.year,
-              'genres.en-US': routeState.genres,
+              genres: routeState.genres,
               price: routeState.price,
             },
             range: { price: routeState.priceRange },
@@ -155,7 +156,7 @@ search.addWidgets([
   }),
   instantsearch.widgets.refinementList({
     container: '#genres',
-    attribute: 'genres.en-US',
+    attribute: 'genres',
   }),
   instantsearch.widgets.searchBox({
     container: '#searchbox',
@@ -167,9 +168,7 @@ search.addWidgets([
         <div>
           <img src="${hit.backdrop}" align="left" alt="${hit.title}" />
           <div class="hit-name">
-            ${instantsearch.highlight({ attribute: 'title.en-US', hit })}, ${
-        hit.year
-      }
+            ${instantsearch.highlight({ attribute: 'title', hit })}, ${hit.year}
           </div>
           <div class="hit-price">\$${hit.price}</div>
         </div>
@@ -178,7 +177,7 @@ search.addWidgets([
         <div>
           <img src="${hit.backdrop}" align="left" alt="${hit.title}" />
           <div class="hit-name">
-            ${instantsearch.highlight({ attribute: 'title.en-US', hit })}, ${
+            ${instantsearch.highlight({ attribute: 'title', hit })}, ${
         hit.year
       }
           </div>
