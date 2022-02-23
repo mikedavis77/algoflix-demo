@@ -18,14 +18,34 @@
   font-weight: normal;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1rem;
+.header-title a:after {
+  content: 'Algoflix';
 }
 
-.search-panel {
+.container {
+  /* max-width: 1200px; */
+  max-width: 100%;
+  margin: 0 auto;
+  /* padding: 1rem; */
+}
+@media only screen and (min-width: 992px) {
+  .container {
+    max-width: 970px;
+  }
+}
+@media only screen and (min-width: 1300px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+/* .search-panel {
   display: flex;
+} */
+@media only screen and (min-width: 640px) {
+  .search-panel {
+    display: flex;
+  }
 }
 
 .search-panel__filters {
@@ -33,7 +53,7 @@
 }
 
 .search-panel__results {
-  flex: 3;
+  flex: 4;
 }
 
 .ais-Highlight-highlighted {
@@ -53,8 +73,19 @@
 
 .ais-Hits-item {
   margin-bottom: 1em;
-  width: calc(33% - 1rem);
+  width: calc(100% - 1rem);
 }
+@media only screen and (min-width: 640px) {
+  .ais-Hits-item {
+    width: calc(50% - 1rem);
+  }
+}
+@media only screen and (min-width: 768px) {
+  .ais-Hits-item {
+    width: calc(33% - 1rem);
+  }
+}
+
 .ais-Hits-item img {
   margin-right: 1em;
   width: 100%;

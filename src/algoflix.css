@@ -1,0 +1,67 @@
+body {
+  background: #17012c;
+}
+
+.header {
+  /* background-image: linear-gradient(284deg, #050505, #17012c); */
+  background-image: none;
+  background-color: #17012c;
+}
+
+.header-title {
+  background: url('logo-algoflix-darkBG.svg') no-repeat center;
+  width: 100px;
+  height: 100px;
+}
+
+.header-title a:after {
+  content: '';
+}
+
+h2,
+.hit-name,
+.hit-price {
+  color: #ffffff;
+}
+
+.ais-RefinementList,
+.ais-RangeSlider {
+  color: #cacfff;
+}
+
+.ais-ClearRefinements-button,
+.ais-CurrentRefinements-reset,
+.ais-GeoSearch-redo,
+.ais-GeoSearch-reset,
+.ais-HierarchicalMenu-showMore,
+.ais-InfiniteHits-loadMore,
+.ais-InfiniteHits-loadPrevious,
+.ais-InfiniteResults-loadMore,
+.ais-Menu-showMore,
+.ais-RefinementList-showMore {
+  background-color: #cacfff;
+}
+.ais-CurrentRefinements-item {
+  background-color: #777aaf;
+}
+.ais-ClearRefinements-button--disabled:hover {
+  background-color: #777aaf;
+}
+.ais-ClearRefinements-button {
+  background-color: #cacfff;
+}
+.ais-ClearRefinements-button:hover,
+.ais-RefinementList-showMore:hover {
+  background-color: #777aaf;
+}
+.ais-Pagination-item--selected .ais-Pagination-link {
+  background-color: #777aaf;
+  border-color: #777aaf;
+}
+.ais-Pagination-link {
+  color: #777aaf;
+}
+.ais-Pagination-link:focus,
+.ais-Pagination-link:hover {
+  color: #777aaf;
+}
