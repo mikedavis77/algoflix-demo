@@ -18,34 +18,23 @@
   font-weight: normal;
 }
 
-.header-title a:after {
-  content: 'Algoflix';
+.header-title::after {
+  content: ' ▸ ';
+  padding: 0 0.5rem;
+}
+
+.header-subtitle {
+  font-size: 1.2rem;
 }
 
 .container {
-  /* max-width: 1200px; */
-  max-width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
-  /* padding: 1rem; */
-}
-@media only screen and (min-width: 992px) {
-  .container {
-    max-width: 970px;
-  }
-}
-@media only screen and (min-width: 1300px) {
-  .container {
-    max-width: 1200px;
-  }
+  padding: 1rem;
 }
 
-/* .search-panel {
+.search-panel {
   display: flex;
-} */
-@media only screen and (min-width: 640px) {
-  .search-panel {
-    display: flex;
-  }
 }
 
 .search-panel__filters {
@@ -53,7 +42,7 @@
 }
 
 .search-panel__results {
-  flex: 4;
+  flex: 3;
 }
 
 .ais-Highlight-highlighted {
@@ -61,29 +50,9 @@
   font-size: inherit;
 }
 
-#searchbox {
-  flex-grow: 1;
-  margin-left: 2rem;
-}
-
 #pagination {
   margin: 2rem auto;
   text-align: center;
-}
-
-.ais-Hits-item {
-  margin-bottom: 1em;
-  width: calc(100% - 1rem);
-}
-@media only screen and (min-width: 640px) {
-  .ais-Hits-item {
-    width: calc(50% - 1rem);
-  }
-}
-@media only screen and (min-width: 768px) {
-  .ais-Hits-item {
-    width: calc(33% - 1rem);
-  }
 }
 
 .ais-Hits-item img {
@@ -91,18 +60,14 @@
   width: 100%;
 }
 
-.ais-ClearRefinements {
-  margin: 1em 0;
+.ais-Hits-item {
+  width: calc(33% - 1rem);
 }
 
+#searchbox {
+  flex-grow: 1;
+  margin-left: 2rem;
+}
 .ais-SearchBox {
   margin: 1em 0;
-}
-
-.ais-Pagination {
-  margin-top: 1em;
-}
-
-.ais-RangeSlider {
-  width: 80%;
 }

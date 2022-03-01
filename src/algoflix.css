@@ -13,9 +13,15 @@ body {
   width: 100px;
   height: 100px;
 }
-
-.header-title a:after {
+.header-title a {
+  display: none;
+}
+.header-title::after {
   content: '';
+}
+
+.container {
+  padding: 0;
 }
 
 h2,
@@ -64,4 +70,20 @@ h2,
 .ais-Pagination-link:focus,
 .ais-Pagination-link:hover {
   color: #777aaf;
+}
+
+.ais-Hits-item {
+  box-shadow: none;
+}
+
+.ais-ClearRefinements {
+  margin: 1em 0;
+}
+
+.ais-Highlight-highlighted {
+  background-color: #777aaf;
+}
+
+.ais-RangeSlider {
+  width: 80%;
 }
