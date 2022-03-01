@@ -164,14 +164,12 @@ search.addWidgets([
   instantsearch.widgets.hits({
     container: '#hits',
     templates: {
-      //event code start
+      // event code start.
       item: (hit, bindEvent) => `
         <div>
           <img src="${hit.backdrop}" align="left" alt="${hit.title}" />
           <div class="hit-name">
-            ${instantsearch.highlight({ attribute: 'title.en-US', hit })}, ${
-        hit.year
-      }
+            ${instantsearch.highlight({ attribute: 'title', hit })}, ${hit.year}
           </div>
           <div class="hit-price">\$${hit.price}</div>
           <div class="hit-add-cart"><button ${bindEvent(
