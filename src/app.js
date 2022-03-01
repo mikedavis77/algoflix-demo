@@ -164,13 +164,21 @@ search.addWidgets([
   instantsearch.widgets.hits({
     container: '#hits',
     templates: {
-      item: hit => `
+      //event code start
+      item: (hit, bindEvent) => `
         <div>
           <img src="${hit.backdrop}" align="left" alt="${hit.title}" />
           <div class="hit-name">
-            ${instantsearch.highlight({ attribute: 'title', hit })}, ${hit.year}
+            ${instantsearch.highlight({ attribute: 'title.en-US', hit })}, ${
+        hit.year
+      }
           </div>
-          <div class="hit-price">£${hit.price}</div>
+          <div class="hit-price">\$${hit.price}</div>
+          <div class="hit-add-cart"><button ${bindEvent(
+            'click',
+            hit,
+            'add-to-cart'
+          )}>Add to Cart</button></div>
         </div>
       `,
     },
@@ -179,5 +187,12 @@ search.addWidgets([
     container: '#pagination',
   }),
 ]);
+
+search.use(
+  instantsearch.middlewares.createInsightsMiddleware({
+    insightsClient: window.aa,
+  })
+);
+window.aa('setUserToken', 'my-user-token');
 
 search.start();

@@ -19,7 +19,31 @@
     <link rel="stylesheet" href="./src/app.css" />
     <link rel="stylesheet" href="./src/algoflix.css" />
 
-    <title>Algoflix Demo</title>
+    <!-- Event code start -->
+    <script>
+      var ALGOLIA_INSIGHTS_SRC =
+        'https://cdn.jsdelivr.net/npm/search-insights@1.7.1';
+      !(function(e, a, t, n, s, i, c) {
+        (e.AlgoliaAnalyticsObject = s),
+          (e[s] =
+            e[s] ||
+            function() {
+              (e[s].queue = e[s].queue || []).push(arguments);
+            }),
+          (i = a.createElement(t)),
+          (c = a.getElementsByTagName(t)[0]),
+          (i.async = 1),
+          (i.src = n),
+          c.parentNode.insertBefore(i, c);
+      })(window, document, 'script', ALGOLIA_INSIGHTS_SRC, 'aa');
+
+      aa('init', {
+        appId: 'latency',
+        apiKey: 'af044fb0788d6bb15f807e4420592bc5',
+      });
+    </script>
+
+    <title>Agoflix Demo</title>
   </head>
 
   <body>
