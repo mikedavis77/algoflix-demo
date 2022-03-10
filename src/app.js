@@ -1,12 +1,12 @@
 const { algoliasearch, instantsearch } = window;
 
 const searchClient = algoliasearch(
-  'latency',
-  'af044fb0788d6bb15f807e4420592bc5'
+  'RUYDS1M9XL',
+  '0a4f95eb04d1fc4422373aa864bb2ff4'
 );
 
 const search = instantsearch({
-  indexName: 'algoflix-en-us',
+  indexName: 'algoflix_en',
   searchClient,
   // routing: true, // Basic routing enabled.
   /* routing: {
