@@ -172,11 +172,11 @@ search.addWidgets([
             ${instantsearch.highlight({ attribute: 'title', hit })}, ${hit.year}
           </div>
           <div class="hit-price">\$${hit.price}</div>
-          <div class="hit-add-cart"><button ${bindEvent(
-            'click',
-            hit,
-            'add-to-cart'
-          )}>Add to Cart</button></div>
+          <div class="hit-add-cart"><button class="add-to-cart" ${bindEvent(
+        'click',
+        hit,
+        'add-to-cart'
+      )}>Add to Cart</button></div>
         </div>
       `,
     },
