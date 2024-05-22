@@ -3,7 +3,6 @@ body {
 }
 
 .header {
-  /* background-image: linear-gradient(284deg, #050505, #17012c); */
   background-image: none;
   background-color: #17012c;
 }
@@ -30,10 +29,34 @@ h2,
   color: #ffffff;
 }
 
-.ais-RefinementList,
-.ais-RangeSlider {
+#searchbox {
+  margin-bottom: 0rem;
+  flex-grow: 1;
+  margin-left: 2rem;
+}
+
+.ais-SearchBox {
+  margin: 1em 0;
+}
+
+.ais-RefinementList/* ,
+.ais-RangeSlider */ {
   color: #cacfff;
 }
+
+button.ais-ClearRefinements-button.ais-ClearRefinements-button--disabled,
+.ais-CurrentRefinements-item {
+  white-space: nowrap;
+  font-size: 0.8rem;
+  color: #fff;
+}
+
+/* input.ais-RefinementList-checkbox {
+  margin: 0 0.5rem 0 0;
+}
+.ais-RefinementList-count {
+  margin-left: 0.5rem;
+} */
 
 .ais-ClearRefinements-button,
 .ais-CurrentRefinements-reset,
@@ -46,9 +69,17 @@ h2,
 .ais-Menu-showMore,
 .ais-RefinementList-showMore {
   background-color: #cacfff;
+  background-image: unset;
+  border: none;
 }
 .ais-CurrentRefinements-item {
   background-color: #777aaf;
+}
+
+.ais-ClearRefinements-button:disabled[disabled],
+.ais-ClearRefinements-button--disabled {
+  background-color: #777aaf;
+  background-image: unset;
 }
 .ais-ClearRefinements-button--disabled:hover {
   background-color: #777aaf;
@@ -59,25 +90,60 @@ h2,
 .ais-ClearRefinements-button:hover,
 .ais-RefinementList-showMore:hover {
   background-color: #777aaf;
+  background-image: unset;
+}
+.ais-ClearRefinements {
+  margin: 1em 0;
+  width: 200px;
+}
+
+.ais-Pagination-item {
+  padding: 0 0.15em;
+}
+.ais-Pagination-item--disabled .ais-Pagination-link,
+.ais-Pagination-link {
+  color: #777aaf;
+  background-color: unset;
+  background-image: unset;
 }
 .ais-Pagination-item--selected .ais-Pagination-link {
   background-color: #777aaf;
   border-color: #777aaf;
+  color: white;
 }
-.ais-Pagination-link {
-  color: #777aaf;
-}
+
 .ais-Pagination-link:focus,
 .ais-Pagination-link:hover {
   color: #777aaf;
+  background-color: unset;
+  background-image: unset;
 }
 
+.ais-Hits-list/* ,
+.ais-Results-list  */ {
+  margin-top: -1rem;
+  margin-left: -1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
 .ais-Hits-item {
   box-shadow: none;
+  width: calc(25% - 1rem);
+  /* width: calc(33% - 1rem); */
+  background: unset;
 }
 
-.ais-ClearRefinements {
-  margin: 1em 0;
+/* .ais-Hits-item article {
+  display: flex;
+} */
+
+.ais-Hits-item img {
+  margin-right: 1em;
+  width: 100%;
+  max-height: unset;
 }
 
 .ais-Highlight-highlighted {

@@ -50,24 +50,20 @@
   font-size: inherit;
 }
 
+#searchbox {
+  margin-bottom: 2rem;
+}
+
 #pagination {
   margin: 2rem auto;
   text-align: center;
 }
 
+.ais-Hits-item article {
+  display: flex;
+}
+
 .ais-Hits-item img {
-  margin-right: 1em;
-  width: 100%;
-}
-
-.ais-Hits-item {
-  width: calc(33% - 1rem);
-}
-
-#searchbox {
-  flex-grow: 1;
-  margin-left: 2rem;
-}
-.ais-SearchBox {
-  margin: 1em 0;
+  max-height: 125px;
+  padding-right: 16px;
 }

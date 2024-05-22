@@ -8,6 +8,7 @@ const searchClient = algoliasearch(
 const search = instantsearch({
   indexName: 'algoflix_en',
   searchClient,
+  //insights: true,
   // routing: true, // Basic routing enabled.
   /* routing: {
     // Basic routing with index set, so it doesn't show in the URL.
@@ -123,7 +124,7 @@ const search = instantsearch({
 
 search.addWidgets([
   instantsearch.widgets.configure({
-    hitsPerPage: 9,
+    hitsPerPage: 12,
   }),
   instantsearch.widgets.clearRefinements({
     container: '#clear-refinements',
@@ -141,7 +142,7 @@ search.addWidgets([
     container: '#price',
     attribute: 'price',
   }),
-  instantsearch.widgets.rangeSlider({
+  /* instantsearch.widgets.rangeSlider({
     container: '#price-slider',
     attribute: 'price',
     pips: false,
@@ -153,7 +154,7 @@ search.addWidgets([
         return value;
       },
     },
-  }),
+  }), */
   instantsearch.widgets.refinementList({
     container: '#genres',
     attribute: 'genres',
@@ -166,7 +167,7 @@ search.addWidgets([
     templates: {
       item: hit => `
         <div>
-          <img src="${hit.backdrop}" align="left" alt="${hit.title}" />
+          <img src="${hit.poster}" align="left" alt="${hit.title}" />
           <div class="hit-name">
             ${instantsearch.highlight({ attribute: 'title', hit })}, ${hit.year}
           </div>
