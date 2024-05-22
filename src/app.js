@@ -124,7 +124,7 @@ const search = instantsearch({
 
 search.addWidgets([
   instantsearch.widgets.configure({
-    hitsPerPage: 12,
+    hitsPerPage: 8,
   }),
   instantsearch.widgets.clearRefinements({
     container: '#clear-refinements',
