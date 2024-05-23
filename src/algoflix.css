@@ -24,10 +24,15 @@ body {
   padding: 0;
 }
 
-h2,
 .hit-name,
 .hit-price {
   color: #ffffff;
+}
+.hit-title {
+  font-size: 1.25em;
+}
+.hit-price {
+  margin-top: 1em;
 }
 
 #searchbox {
@@ -130,6 +135,7 @@ button.ais-ClearRefinements-button.ais-ClearRefinements-button--disabled,
 
 .ais-Hits-item img {
   margin-right: 1em;
+  margin-bottom: 1em;
   width: 100%;
   max-height: unset;
 }

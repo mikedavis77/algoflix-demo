@@ -169,9 +169,13 @@ search.addWidgets([
         <div>
           <img src="${hit.poster}" align="left" alt="${hit.title}" />
           <div class="hit-name">
-            ${instantsearch.highlight({ attribute: 'title', hit })}, ${hit.year}
+            <span class="hit-title">${instantsearch.highlight({
+              attribute: 'title',
+              hit,
+            })}</span> 
+            <span class="hit-year">(${hit.year})</span>
           </div>
-          <div class="hit-price">£${hit.price}</div>
+          <div class="hit-price">$${hit.price}</div>
         </div>
       `,
     },
