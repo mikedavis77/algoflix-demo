@@ -13,7 +13,7 @@ const searchClient = algoliasearch(
 const search = instantsearch({
   indexName: 'algoflix_en',
   searchClient,
-  //insights: true,
+  insights: true,
 });
 
 const virtualSearchBox = instantsearch.connectors.connectSearchBox(() => {});
@@ -61,17 +61,30 @@ search.addWidgets([
   instantsearch.widgets.hits({
     container: '#hits',
     templates: {
-      item: (hit) => `
+      item: (hit, { html, components, sendEvent }) => html`
         <div>
           <img src="${hit.poster}" align="left" alt="${hit.title}" />
           <div class="hit-name">
-            <span class="hit-title">${instantsearch.highlight({
-              attribute: 'title',
-              hit,
-            })}</span> 
+            <span class="hit-title"
+              >${components.Highlight({
+                attribute: 'title',
+                hit,
+              })}</span
+            >
             <span class="hit-year">(${hit.year})</span>
           </div>
           <div class="hit-price">$${hit.price}</div>
+          <div class="hit-add-cart">
+            <button
+              class="add-to-cart"
+              onClick="${(event) => {
+                event.stopPropagation();
+                sendEvent('click', hit, 'Product Added to Cart');
+              }}"
+            >
+              Add to Cart
+            </button>
+          </div>
         </div>
       `,
     },
