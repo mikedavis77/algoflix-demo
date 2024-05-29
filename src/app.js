@@ -1,4 +1,9 @@
 const { algoliasearch, instantsearch } = window;
+const { autocomplete } = window['@algolia/autocomplete-js'];
+const { createLocalStorageRecentSearchesPlugin } =
+  window['@algolia/autocomplete-plugin-recent-searches'];
+const { createQuerySuggestionsPlugin } =
+  window['@algolia/autocomplete-plugin-query-suggestions'];
 
 const searchClient = algoliasearch(
   'RUYDS1M9XL',
@@ -9,120 +14,14 @@ const search = instantsearch({
   indexName: 'algoflix_en',
   searchClient,
   //insights: true,
-  // routing: true, // Basic routing enabled.
-  /* routing: {
-    // Basic routing with index set, so it doesn't show in the URL.
-    stateMapping: instantsearch.stateMappings.singleIndex('algoflix-en-us'),
-  }, */
-  /* routing: {
-    // Custom routes.
-    router: instantsearch.routers.history({
-      windowTitle({ query }) {
-        return query ? `Results for "${query}"` : 'Search';
-      },
-
-      createURL({ qsModule, routeState, location }) {
-        const urlParts = location.href.match(/^(.*?)/);
-        const baseUrl = `${urlParts ? urlParts[1] : ''}/`;
-        //console.log('cU:', routeState, urlParts, baseUrl);
-
-        const queryParameters = {};
-        if (routeState.query) {
-          queryParameters.query = encodeURIComponent(routeState.query);
-        }
-        if (routeState.page !== 1) {
-          queryParameters.page = routeState.page;
-        }
-        if (routeState.year) {
-          queryParameters.year = routeState.year.map(encodeURIComponent);
-        }
-        if (routeState.genres) {
-          queryParameters.genres = routeState.genres.map(encodeURIComponent);
-        }
-        if (routeState.price) {
-          queryParameters.price = routeState.price.map(encodeURIComponent);
-        }
-        if (routeState.priceRange) {
-          queryParameters.priceRange = routeState.priceRange;
-        }
-
-        const queryString = qsModule.stringify(queryParameters, {
-          addQueryPrefix: true,
-          arrayFormat: 'repeat',
-        });
-
-        return `${baseUrl}${queryString}`;
-      },
-
-      parseURL({ qsModule, location }) {
-        //console.log('pU:', location);
-        const {
-          query = '',
-          page,
-          year = [],
-          genres = [],
-          price = [],
-          priceRange = '',
-        } = qsModule.parse(location.search.slice(1));
-        //console.log('search', location.search.slice(1));
-        // `qs` does not return an array when there's a single value.
-        const allYears = Array.isArray(year) ? year : [year].filter(Boolean);
-        const allGenres = Array.isArray(genres)
-          ? genres
-          : [genres].filter(Boolean);
-        const allPrices = Array.isArray(price)
-          ? price
-          : [price].filter(Boolean);
-        //console.log('data', allYears, allGenres, allPrices, priceRange);
-
-        return {
-          query: decodeURIComponent(query),
-          page,
-          year: allYears.map(decodeURIComponent),
-          genres: allGenres.map(decodeURIComponent),
-          price: allPrices.map(decodeURIComponent),
-          priceRange,
-        };
-      },
-    }),
-
-    stateMapping: {
-      stateToRoute(uiState) {
-        const indexUiState = uiState['algoflix-en-us'] || {};
-        //console.log('sr:', uiState);
-
-        return {
-          query: indexUiState.query,
-          page: indexUiState.page,
-          year: indexUiState.refinementList && indexUiState.refinementList.year,
-          genres:
-            indexUiState.refinementList && indexUiState.refinementList.genres,
-          price:
-            indexUiState.refinementList && indexUiState.refinementList.price,
-          priceRange: indexUiState.range && indexUiState.range.price,
-        };
-      },
-
-      routeToState(routeState) {
-        //console.log('routeToState:', routeState);
-        return {
-          algoflix: {
-            query: routeState.query,
-            page: routeState.page,
-            refinementList: {
-              year: routeState.year,
-              genres: routeState.genres,
-              price: routeState.price,
-            },
-            range: { price: routeState.priceRange },
-          },
-        };
-      },
-    },
-  }, */
 });
 
+const virtualSearchBox = instantsearch.connectors.connectSearchBox(() => {});
 search.addWidgets([
+  virtualSearchBox({}),
+  /* instantsearch.widgets.searchBox({
+    container: '#searchbox',
+  }), */
   instantsearch.widgets.configure({
     hitsPerPage: 8,
   }),
@@ -159,13 +58,10 @@ search.addWidgets([
     container: '#genres',
     attribute: 'genres',
   }),
-  instantsearch.widgets.searchBox({
-    container: '#searchbox',
-  }),
   instantsearch.widgets.hits({
     container: '#hits',
     templates: {
-      item: hit => `
+      item: (hit) => `
         <div>
           <img src="${hit.poster}" align="left" alt="${hit.title}" />
           <div class="hit-name">
@@ -186,3 +82,79 @@ search.addWidgets([
 ]);
 
 search.start();
+
+/** Autocomplete */
+/** Recent searches plugin */
+const recentSearchesPlugin = createLocalStorageRecentSearchesPlugin({
+  key: 'algoflix_en',
+  limit: 3,
+  transformSource({ source }) {
+    return {
+      ...source,
+      onSelect({ setIsOpen, setQuery, item, event }) {
+        onSelect({ setQuery, setIsOpen, event, query: item.label });
+      },
+    };
+  },
+});
+
+/** Query suggestions plugin */
+const querySuggestionsPlugin = createQuerySuggestionsPlugin({
+  searchClient,
+  indexName: 'algoflix_en_query_suggestions',
+  getSearchParams() {
+    return recentSearchesPlugin.data.getAlgoliaSearchParams({ hitsPerPage: 6 });
+  },
+  transformSource({ source }) {
+    return {
+      ...source,
+      sourceId: 'querySuggestionsPlugin',
+      onSelect({ setIsOpen, setQuery, event, item }) {
+        onSelect({ setQuery, setIsOpen, event, query: item.query });
+      },
+      getItems(params) {
+        if (!params.state.query) {
+          return [];
+        }
+
+        return source.getItems(params);
+      },
+    };
+  },
+});
+
+autocomplete({
+  container: '#searchbox',
+  openOnFocus: true,
+  detachedMediaQuery: 'none',
+  onSubmit({ state }) {
+    setInstantSearchUiState({ query: state.query });
+  },
+  plugins: [recentSearchesPlugin, querySuggestionsPlugin],
+});
+
+function setInstantSearchUiState(indexUiState) {
+  search.mainIndex.setIndexUiState({ page: 1, ...indexUiState });
+}
+
+function onSelect({ setIsOpen, setQuery, event, query }) {
+  if (isModifierEvent(event)) {
+    return;
+  }
+
+  setQuery(query);
+  setIsOpen(false);
+  setInstantSearchUiState({ query });
+}
+
+function isModifierEvent(event) {
+  const isMiddleClick = event.button === 1;
+
+  return (
+    isMiddleClick ||
+    event.altKey ||
+    event.ctrlKey ||
+    event.metaKey ||
+    event.shiftKey
+  );
+}
