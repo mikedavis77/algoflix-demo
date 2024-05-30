@@ -41,19 +41,6 @@ search.addWidgets([
     container: '#price',
     attribute: 'price',
   }),
-  /* instantsearch.widgets.rangeSlider({
-    container: '#price-slider',
-    attribute: 'price',
-    pips: false,
-    tooltips: {
-      format(value) {
-        if (value < 3) return 'Low';
-        if (value < 7) return 'Mid';
-        if (value >= 7) return 'High';
-        return value;
-      },
-    },
-  }), */
   instantsearch.widgets.refinementList({
     container: '#genres',
     attribute: 'genres',
@@ -80,6 +67,7 @@ search.addWidgets([
               onClick="${(event) => {
                 event.stopPropagation();
                 sendEvent('click', hit, 'Product Added to Cart');
+                alert(`Added "${hit.title}" to the cart`);
               }}"
             >
               Add to Cart
