@@ -166,6 +166,7 @@ button.ais-ClearRefinements-button.ais-ClearRefinements-button--disabled,
 .add-to-cart:focus {
   border-color: rgba(0, 0, 0, 0.5);
   color: rgba(0, 0, 0, 0.65);
+  cursor: pointer;
 }
 .add-to-cart:active {
   background-color: #f0f0f1;
