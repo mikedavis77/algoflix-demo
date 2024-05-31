@@ -104,6 +104,9 @@ button.ais-ClearRefinements-button.ais-ClearRefinements-button--disabled,
   margin-left: 1em;
   width: 200px;
 }
+#current-refinements {
+  align-content: center;
+}
 
 .ais-Pagination-item {
   padding: 0 0.15em;
