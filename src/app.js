@@ -31,17 +31,23 @@ search.addWidgets([
   instantsearch.widgets.currentRefinements({
     container: '#current-refinements',
   }),
-  instantsearch.widgets.refinementList({
+  instantsearch.widgets.panel({
+    templates: { header: () => 'Year' },
+  })(instantsearch.widgets.refinementList)({
     container: '#year',
     attribute: 'year',
     limit: 5,
     showMore: true,
   }),
-  instantsearch.widgets.refinementList({
+  instantsearch.widgets.panel({
+    templates: { header: () => 'Price' },
+  })(instantsearch.widgets.refinementList)({
     container: '#price',
     attribute: 'price',
   }),
-  instantsearch.widgets.refinementList({
+  instantsearch.widgets.panel({
+    templates: { header: () => 'Genres' },
+  })(instantsearch.widgets.refinementList)({
     container: '#genres',
     attribute: 'genres',
   }),
@@ -49,7 +55,11 @@ search.addWidgets([
     container: '#hits',
     templates: {
       item: (hit, { html, components, sendEvent }) => html`
-        <div>
+        <div
+          onClick="${() => {
+            alert(`Clicked to view: "${hit.title}"`);
+          }}"
+        >
           <img src="${hit.poster}" align="left" alt="${hit.title}" />
           <div class="hit-name">
             <span class="hit-title"
@@ -66,7 +76,7 @@ search.addWidgets([
               class="add-to-cart"
               onClick="${(event) => {
                 event.stopPropagation();
-                sendEvent('click', hit, 'Product Added to Cart');
+                sendEvent('conversion', hit, 'Product Added to Cart');
                 alert(`Added "${hit.title}" to the cart`);
               }}"
             >

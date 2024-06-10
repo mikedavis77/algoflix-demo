@@ -27,8 +27,11 @@ body {
   padding: 0;
 }
 
-h2 {
+.ais-Panel-header {
   color: #ffffff;
+  font-size: 1rem;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
 }
 .hit-name,
 .hit-price {
@@ -145,7 +148,9 @@ button.ais-ClearRefinements-button.ais-ClearRefinements-button--disabled,
   background: unset;
   align-items: unset;
 }
-
+.ais-Hits-item:hover {
+  cursor: pointer;
+}
 .ais-Hits-item img {
   margin-right: 1em;
   margin-bottom: 1em;
